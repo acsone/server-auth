@@ -36,4 +36,3 @@ class TestAuthApiKey(TransactionCase):
         with self.assertRaises(AccessError), self.env.cr.savepoint():
             self.env["auth.api.key"].sudo(user=demo_user).\
                 _retrieve_uid_from_api_key("api_wrong_key")
-

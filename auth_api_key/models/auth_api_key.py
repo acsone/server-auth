@@ -2,7 +2,7 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models, toolsi, _
+from odoo import api, models, tools, _
 
 from odoo.addons.server_environment import serv_config
 
@@ -20,7 +20,7 @@ class AuthApiKey(models.TransientModel):
 
         for section in serv_config.sections():
             if section.startswith("api_key_") and serv_config.has_option(
-                section, "key"
+                    section, "key"
             ):
                 if api_key != serv_config.get(section, "key"):
                     continue
