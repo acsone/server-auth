@@ -2,12 +2,12 @@
 # Copyright 2018 ACSONE SA/NV
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import api, models, tools, _
+from openerp import api, models, tools, _
 
-from odoo.addons.server_environment import serv_config
-from odoo.tools import consteq
+from openerp.addons.server_environment import serv_config
+from openerp.tools import consteq
 
-from odoo.exceptions import ValidationError, AccessError
+from openerp.exceptions import ValidationError, AccessError
 
 
 class AuthApiKey(models.TransientModel):
