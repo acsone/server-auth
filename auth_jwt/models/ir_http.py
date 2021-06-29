@@ -39,11 +39,11 @@ class IrHttpJwt(models.AbstractModel):
                     'A route with auth="jwt" must not be used within a user session.'
                 )
                 raise UnauthorizedSessionMismatch()
-            if request.uid:
-                _logger.error(
-                    'A route with auth="jwt" should not have a request.uid here.'
-                )
-                raise UnauthorizedSessionMismatch()
+            # if request.uid:
+            #    _logger.error(
+            #        'A route with auth="jwt" should not have a request.uid here.'
+            #    )
+            #    raise UnauthorizedSessionMismatch()
         return super()._authenticate(endpoint)
 
     @classmethod
