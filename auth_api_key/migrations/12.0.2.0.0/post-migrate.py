@@ -21,7 +21,11 @@ def migrate(cr, version):
                 login_name = serv_config.get(section, "user")
                 name = section.replace("api_key_", "")
                 key = "<set from server environment>"
-                user = env["res.users"].search([("login", "=", login_name)])
+                user = (
+                    env["res.users"]
+                    .with_context(active_test=False)
+                    .search([("login", "=", login_name)])
+                )
                 env["auth.api.key"].create(
                     {"name": name, "key": key, "user_id": user.id}
                 )
