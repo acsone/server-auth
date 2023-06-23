@@ -1,1 +1,2 @@
 pyjwt[cryptography]
+odoo14-addon-base_future_response @ git+https://github.com/OCA/server-tools@refs/pull/2660/head#subdirectory=setup/base_future_response
