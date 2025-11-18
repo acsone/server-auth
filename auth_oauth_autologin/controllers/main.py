@@ -20,15 +20,14 @@ class OAuthAutoLogin(OAuthLogin):
         if len(providers) == 1:
             return providers[0].get("auth_link")
 
-    @http.route(
-        "/auth/auto_login_redirect_link",
-        type="json",
-        auth="none",
-    )
-    def auto_login_redirect_link(self, *args, **kwargs):
-        redirect = kwargs.get("redirect")
-        if self._autologin_disabled(redirect):
-            return False
-        request.params["redirect"] = redirect
-        auth_link = self._autologin_link()
-        return auth_link
+    @http.route()
+    def web_login(self, *args, **kw):
+        # Odoo 18 uses deep links, so the full URL path is available to the server.
+        # We can perform a server-side redirect if autologin is enabled.
+        if request.httprequest.method == "GET" and not self._autologin_disabled(
+            request.httprequest.url
+        ):
+            auth_link = self._autologin_link()
+            if auth_link:
+                return request.redirect(auth_link, 303, local=False)
+        return super().web_login(*args, **kw)
